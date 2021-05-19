@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": true,
+    "sourceMap": true, 
+    /* package.jsonのoutputと同じディレクトリ? */
+    /* index.tsをトランスパイルしてdistディレクトリにindex.jsを作成 */
+    /* package.jsonのoutputでindex.jsを指定することで読み込みを行う */
+    "outDir": "./dist", 
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts"
+  ]
+}

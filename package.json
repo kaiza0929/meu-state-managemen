@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "@types/node": "^15.3.0",
+    "meu-state-management": "file:meu-state-management-1.0.0.tgz",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rxjs": "^7.0.1",
+    "webpack": "^5.37.0"
+  },
+  "name": "meu-state-management",
+  "description": "",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack-cli": "^4.7.0"
+  }
+}
