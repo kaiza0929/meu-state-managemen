@@ -42,6 +42,7 @@ export default class Store {
     }
 
     /* Single source of truth(ソースは１つだけ)の原則  storeは1アプリに1つのみ存在する */
+    /* stateも1つだけ?(storeが1つだけ = state(オブジェクト)はそのstoreが管理するstateのみアプリ上に存在することになる?) */
     static createStore(initState: State, reducer: Function): Store {
         if (!this._instance) {
             this._instance = new Store(initState, reducer);
