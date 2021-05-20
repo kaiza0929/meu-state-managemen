@@ -1,7 +1,5 @@
 /* tsc --target ES6 index.ts */
 
-import { throws } from "assert/strict";
-
 export type State = {
     [key: string]: string | number | boolean | string[] | number[] | boolean[] | State
 }
@@ -15,9 +13,7 @@ export class ActionCreators {
 
     private static action_creators: {[action_name: string]: Function} = {};
 
-    /* 複数のアクションクリエイターを一つのオブジェクトで管理(バインドアクションクリエイターズを真似る)
-    /* https://noah.plus/blog/024/ */
-
+    /* 複数のアクションクリエイターを一つのオブジェクトで管理(バインドアクションクリエイターズを真似る */
     static addActionCreater(action_name: string, action_creater: Function): void {
         /* アクションクリエイターはアクションを作る関数 */
         ActionCreators.action_creators[action_name] = action_creater;
