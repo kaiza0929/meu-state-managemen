@@ -1,5 +1,7 @@
 /* tsc --target ES6 index.ts */
 
+import { throws } from "assert/strict";
+
 export type State = {
     [key: string]: string | number | boolean | string[] | number[] | boolean[] | State
 }
@@ -30,21 +32,32 @@ export class ActionCreators {
 
 export default class Store {
 
-    private _state: State;
+    private state: State;
     private reducer: Function;
+    private static _instance: Store;
 
-    constructor(initState: State, reducer: Function) {
-        this._state = initState;
+    private constructor(initState: State, reducer: Function) {
+        this.state = initState;
         this.reducer = reducer;
     }
 
-    get state(): State {
-        return this._state;
+    /* Single source of truth(ソースは１つだけ)の原則  storeは1アプリに1つのみ存在する */
+    static createStore(initState: State, reducer: Function): Store {
+        if (!this._instance) {
+            this._instance = new Store(initState, reducer);
+        } else {
+            console.log("storeは1アプリに1つしか存在できません");
+        }
+        return this._instance;
+    }
+
+    static getState(): State {
+        return this._instance.state;
     }
 
     dispatch(action: Action): void {
         /* reducer(関数)はユーザーが定義 */
-        this._state = this.reducer(this._state, action);
+        Store._instance.state = Store._instance.reducer(Store._instance.state, action);
     }
 
 }

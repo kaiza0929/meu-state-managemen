@@ -11,9 +11,11 @@ export declare class ActionCreators {
     static callActionCreater(action_name: string): Action;
 }
 export default class Store {
-    private _state;
+    private state;
     private reducer;
-    constructor(initState: State, reducer: Function);
-    get state(): State;
+    private static _instance;
+    private constructor();
+    static createStore(initState: State, reducer: Function): Store;
+    static getState(): State;
     dispatch(action: Action): void;
 }

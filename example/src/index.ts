@@ -10,7 +10,9 @@ var reducer = (state: State, action: Action): State => {
     }
 }
 
-var store: Store = new Store({name: "", age: "",  books: []}, reducer);
+var store: Store = Store.createStore({name: "", age: "",  books: []}, reducer);
+var store2: Store = Store.createStore({user_name: "", user_age: "",  bought_books: []}, reducer);
+console.log(store2);
 var count = 0;
 
 ActionCreators.addActionCreater("SETACTION", () => { 
@@ -29,10 +31,11 @@ document.addEventListener("click", () => {
     }
 
     count += 1;
-    console.log(store.state);
+    console.log(store);
+    var state: State = Store.getState();
     
     /* react内部で処理されること(仮想DOM) */
-    Object.values(store.state).forEach((val, index) => {
+    Object.values(state).forEach((val, index) => {
         document.getElementsByClassName("info")[index].innerHTML = JSON.stringify(val);
     });
 

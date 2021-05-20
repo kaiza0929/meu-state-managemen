@@ -21,19 +21,25 @@ var ActionCreators = /** @class */ (function () {
 exports.ActionCreators = ActionCreators;
 var Store = /** @class */ (function () {
     function Store(initState, reducer) {
-        this._state = initState;
+        this.state = initState;
         this.reducer = reducer;
     }
-    Object.defineProperty(Store.prototype, "state", {
-        get: function () {
-            return this._state;
-        },
-        enumerable: false,
-        configurable: true
-    });
+    /* Single source of truth(ソースは１つだけ)の原則  storeは1アプリに1つのみ存在する */
+    Store.createStore = function (initState, reducer) {
+        if (!this._instance) {
+            this._instance = new Store(initState, reducer);
+        }
+        else {
+            console.log("storeは1アプリに1つしか存在できません");
+        }
+        return this._instance;
+    };
+    Store.getState = function () {
+        return this._instance.state;
+    };
     Store.prototype.dispatch = function (action) {
         /* reducer(関数)はユーザーが定義 */
-        this._state = this.reducer(this._state, action);
+        Store._instance.state = Store._instance.reducer(Store._instance.state, action);
     };
     return Store;
 }());

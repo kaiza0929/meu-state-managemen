@@ -23,7 +23,9 @@ var reducer = function (state, action) {
         return state;
     }
 };
-var store = new meu_state_management_1["default"]({ name: "", age: "", books: [] }, reducer);
+var store = meu_state_management_1["default"].createStore({ name: "", age: "", books: [] }, reducer);
+var store2 = meu_state_management_1["default"].createStore({ user_name: "", user_age: "", bought_books: [] }, reducer);
+console.log(store2);
 var count = 0;
 meu_state_management_1.ActionCreators.addActionCreater("SETACTION", function () {
     return { type: "SET", payload: { name: "Yamada", age: 18, books: ["basic english 1", "basic english 2"] } };
@@ -38,9 +40,10 @@ document.addEventListener("click", function () {
         store.dispatch(meu_state_management_1.ActionCreators.callActionCreater("RESETACTION"));
     }
     count += 1;
-    console.log(store.state);
+    console.log(store);
+    var state = meu_state_management_1["default"].getState();
     /* react内部で処理されること(仮想DOM) */
-    Object.values(store.state).forEach(function (val, index) {
+    Object.values(state).forEach(function (val, index) {
         document.getElementsByClassName("info")[index].innerHTML = JSON.stringify(val);
     });
 });
